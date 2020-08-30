@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchAllEmployees } from '../actions/employee.actions';
 import { isEmpty } from 'lodash';
-import { Container, Button, Modal, Row, Col } from 'reactstrap';
+import { Container, Button, Modal, Row, Col, FormGroup, Label, Input } from 'reactstrap';
 import ReactLoading from 'react-loading';
 
 import AddEmployee from './AddEmployee';
@@ -13,6 +13,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const employees = useSelector(state => state.employees);
   const [isModalOpen, toggleModal] = useState(false);
+  const [ search, setSearch ] = useState('');
 
   useEffect(() => {
     dispatch(fetchAllEmployees());
@@ -27,8 +28,23 @@ const Home = () => {
     employees: totalEmployees,
   } = employees.data;
 
+  const handleSearch = async () => {
+    await  dispatch(fetchAllEmployees(search));
+  }
+
   return (
     <Container>
+      <FormGroup>
+        <Label for="employeeSearch">Search</Label>
+        <Input
+          type="search"
+          name="employeeSearch"
+          placeholder="search employee directory"
+          value={search}
+          onChange={e => setSearch(e.target.value)}
+        />
+      </FormGroup>
+      <Button onClick={() => handleSearch()}>Search</Button>
       <Button onClick={() => toggleModal(!isModalOpen)}>Add Employee</Button>
       <Modal isOpen={isModalOpen} toggle={() => toggleModal(!isModalOpen)}>
         <AddEmployee />

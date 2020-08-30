@@ -1,6 +1,7 @@
 import React , { useState } from 'react';
 import { Button, Form, FormGroup, FormText, Label, Input } from 'reactstrap';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const AddEmployeeForm = () => {
   const [ name, setName ] = useState('');
@@ -10,6 +11,7 @@ const AddEmployeeForm = () => {
   const [ phone, setPhone ] = useState('');
   const [ department, setDepartment ] = useState('Select Department');
   const [ photo, setPhoto ] = useState(null);
+  const history = useHistory();
 
   const handleSubmit = async (e) => {
     const formData = new FormData();
@@ -29,11 +31,11 @@ const AddEmployeeForm = () => {
     };
 
     await axios.post('http://localhost:8080/api/employees', formData, config);
+    history.push('/')
   };
 
-  console.log(photo)
   return (
-    <Form className="p-2" onSubmit={e => handleSubmit(e)}>
+    <Form className="p-2">
       <FormGroup>
         <Label for="name">Name</Label>
         <Input
@@ -111,7 +113,7 @@ const AddEmployeeForm = () => {
           Upload Employee Photo
         </FormText>
       </FormGroup>
-      <Button>Submit</Button>
+      <Button onClick={e => handleSubmit(e)}>Submit</Button>
     </Form>
   );
 }

@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import multer from 'multer';
 
 import Employee from './api/models/employee';
+import react from 'react'
 dotenv.config();
 
 const port = process.env.PORT || 8080;
@@ -57,7 +58,16 @@ try {
   // });
 
   app.get('/api/employees', (req, res, next) => {
-    Employee.find()
+    let query = {};
+    if(req.query.searchTerm) {
+      query = { $or:[
+        { name:{$regex: req.query.searchTerm, $options: 'i'}},
+        { department :{$regex: req.query.searchTerm, $options: 'i'}},
+        { email :{$regex: req.query.searchTerm, $options: 'i'}},
+        { title :{$regex: req.query.searchTerm, $options: 'i'}}
+      ]}
+    };
+    Employee.find(query)
     .exec()
     .then(result => {
       const response = {
@@ -67,7 +77,7 @@ try {
             ...doc._doc,
             request: {
               type: 'GET',
-              url:  `http://localhost:3000/orders/${doc._id}`
+              url:  `http://localhost:8080/api/employees/${doc._id}`
             }
           }
         }),
@@ -81,7 +91,6 @@ try {
   });
 
   app.post('/api/employees', upload.single('imageUrl'), (req, res, next) => {
-    console.log(req)
     const employee = new Employee({
       _id: new mongoose.Types.ObjectId(),
       name: req.body.name,
