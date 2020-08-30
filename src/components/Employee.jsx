@@ -15,10 +15,8 @@ const Employee = ({ match }) => {
   const history = useHistory();
 
   useEffect(() => {
-    if (isEmpty(employee)) {
-      dispatch(fetchUser(match.params.userID));
-    }
-  }, [match, employee, dispatch]);
+    dispatch(fetchUser(match.params.userID));
+  }, [match, dispatch]);
 
   if (isEmpty(employee.data)) {
     return <ReactLoading type={'spin'} color={'#0000'} height={667} width={375} />
@@ -45,7 +43,7 @@ const Employee = ({ match }) => {
       <Row className="justify-content-center mb-2">
         <Col xs={6} className="justify-content-center d-flex">
           <EmployeeCard
-            size={500}
+            size={'40vw'}
             fontSize={'1.6rem'}
             name={name}
             date={dob}
