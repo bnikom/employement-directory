@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchAllEmployees } from '../actions/employee.actions';
@@ -14,10 +14,11 @@ const Home = () => {
   const employees = useSelector(state => state.employees);
   const [isModalOpen, toggleModal] = useState(false);
   const [search, setSearch] = useState('');
+  const [formSubmitted, setFormSubmit] = useState(false);
 
   useEffect(() => {
     dispatch(fetchAllEmployees());
-  }, []);
+  }, [formSubmitted, dispatch]);
 
   if (isEmpty(employees.data)) {
     return <ReactLoading type={'spin'} color={'#0000'} height={667} width={375} />
@@ -53,7 +54,10 @@ const Home = () => {
       </Row>
       <Button onClick={() => toggleModal(!isModalOpen)}>Add Employee</Button>
       <Modal isOpen={isModalOpen} toggle={() => toggleModal(!isModalOpen)}>
-        <AddEmployee />
+        <AddEmployee
+          setFormSubmit={setFormSubmit}
+          toggleModal={toggleModal}
+        />
       </Modal>
       <hr />
       <p>Total Employees: {count}</p>

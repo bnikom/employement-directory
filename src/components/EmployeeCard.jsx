@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardBody, CardImg, CardText, Row, Col } from 'reactstrap';
+import { Card, CardBody, CardImg, CardText } from 'reactstrap';
 import moment from 'moment';
 
 const EmployeeCard = ({

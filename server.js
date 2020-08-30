@@ -52,9 +52,6 @@ try {
   app.use(express.urlencoded({ extended: true }));
   app.use(express.static('public'));
   app.use('/uploads', express.static('uploads'))
-  // app.use((req, res, next) => {
-  //   res.sendFile(path.join(__dirname, "public", "index.html"));
-  // });
 
   app.get('/api/employees', (req, res, next) => {
     let query = {};
@@ -127,6 +124,7 @@ try {
         console.log(error)
         res.status(500).json({ error });
       });
+      // res.redirect('http://localhost:3000/');
   });
 
   app.get('/api/employee/:employeeId', (req, res, next) => {

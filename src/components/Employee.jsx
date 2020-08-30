@@ -18,7 +18,7 @@ const Employee = ({ match }) => {
     if (isEmpty(employee)) {
       dispatch(fetchUser(match.params.userID));
     }
-  }, []);
+  }, [match, employee, dispatch]);
 
   if (isEmpty(employee.data)) {
     return <ReactLoading type={'spin'} color={'#0000'} height={667} width={375} />

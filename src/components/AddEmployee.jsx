@@ -1,9 +1,9 @@
 import React , { useState } from 'react';
 import { Button, Form, FormGroup, FormText, Label, Input } from 'reactstrap';
 import axios from 'axios';
-import { useHistory } from 'react-router-dom';
+import { useHistory, withRouter } from 'react-router-dom';
 
-const AddEmployeeForm = () => {
+const AddEmployeeForm = ({ setFormSubmit, toggleModal }) => {
   const [ name, setName ] = useState('');
   const [ email, setEmail ] = useState('');
   const [ date, setDate ] = useState('');
@@ -31,6 +31,8 @@ const AddEmployeeForm = () => {
     };
 
     await axios.post('http://localhost:8080/api/employees', formData, config);
+    setFormSubmit(prevSubmit => !prevSubmit);
+    toggleModal(prevToggle => !prevToggle);
   };
 
   return (
@@ -46,10 +48,10 @@ const AddEmployeeForm = () => {
         />
       </FormGroup>
       <FormGroup>
-        <Label for="date">Date</Label>
+        <Label for="dob">Date</Label>
         <Input
           type="date"
-          name="date"
+          name="dob"
           placeholder="Enter Employee Date Of Birth"
           value={date}
           onChange={(e) => setDate(e.target.value)}
@@ -76,10 +78,10 @@ const AddEmployeeForm = () => {
         />
       </FormGroup>
       <FormGroup>
-        <Label for="employeeEmail">Email</Label>
+        <Label for="email">Email</Label>
         <Input
           type="email"
-          name="employeeEmail"
+          name="email"
           placeholder="Enter employee email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -102,17 +104,17 @@ const AddEmployeeForm = () => {
         </Input>
       </FormGroup>
       <FormGroup>
-        <Label for="employeePhoto">File</Label>
+        <Label for="imageUrl">File</Label>
         <Input
           type="file"
-          name="employeePhoto"
+          name="imageUrl"
           onChange={(e) => setPhoto(e.target.files[0])}
         />
         <FormText color="muted">
           Upload Employee Photo
         </FormText>
       </FormGroup>
-      <Button onClick={e => handleSubmit(e)}>Submit</Button>
+      <Button onClick={(e) => handleSubmit(e)}>Submit</Button>
     </Form>
   );
 }
