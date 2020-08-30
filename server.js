@@ -7,7 +7,6 @@ import dotenv from 'dotenv';
 import multer from 'multer';
 
 import Employee from './api/models/employee';
-import react from 'react'
 dotenv.config();
 
 const port = process.env.PORT || 8080;

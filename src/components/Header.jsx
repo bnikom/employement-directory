@@ -1,10 +1,13 @@
 import React from 'react';
+import {
+  NavbarBrand
+} from 'reactstrap';
 
 const Header = () => {
   return (
-    <div>
-      EMPLOYEE DIRECTORY
-    </div>
+    <header>
+      <NavbarBrand href='/' className="text-uppercase header-text"> Employee Directory</NavbarBrand>
+    </header>
   );
 };
 

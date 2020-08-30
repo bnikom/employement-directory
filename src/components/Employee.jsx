@@ -1,7 +1,6 @@
 import React, { useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactLoading from 'react-loading';
-import moment from 'moment';
 import { Button, Row, Col } from 'reactstrap';
 import axios from 'axios';
 import { useHistory } from 'react-router-dom';
@@ -41,15 +40,15 @@ const Employee = ({ match }) => {
     imageUrl,
   } = employee.data.result;
 
-  const date = moment(dob).format('MMM D, YYYY')
-
   return (
     <Fragment>
-      <Row>
-        <Col xs={{ size: 4, offset: 4 }}>
+      <Row className="justify-content-center mb-2">
+        <Col xs={6} className="justify-content-center d-flex">
           <EmployeeCard
+            size={500}
+            fontSize={'1.6rem'}
             name={name}
-            date={date}
+            date={dob}
             department={department}
             title={title}
             email={email}

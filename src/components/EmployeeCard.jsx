@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card, CardBody, CardImg, CardText, Row, Col } from 'reactstrap';
+import moment from 'moment';
 
 const EmployeeCard = ({
   name,
@@ -8,10 +9,13 @@ const EmployeeCard = ({
   title,
   email,
   phone,
-  imageUrl
+  imageUrl,
+  size,
+  fontSize
 }) => (
     <Card
       className="d-flex justify-content-center align-items-center flip-card"
+      style={{ width: size, height: size, fontSize }}
     >
       <div className="inner">
         <CardBody className="front">
@@ -24,12 +28,12 @@ const EmployeeCard = ({
           />
         </CardBody>
         <CardBody className="back">
-          <CardText>Name: {name}</CardText>
-          <CardText>DOB: {date}</CardText>
-          <CardText>Department: {department}</CardText>
-          <CardText>Title: {title}</CardText>
-          <CardText>Email: {email}</CardText>
-          <CardText>Phone Number: {phone}</CardText>
+          <CardText><span className="font-weight-bold text-uppercase">Name:</span> {name}</CardText>
+          <CardText><span className="font-weight-bold text-uppercase">DOB:</span> {moment(date).format('MMM D, YYYY')}</CardText>
+          <CardText><span className="font-weight-bold text-uppercase">Department:</span> {department}</CardText>
+          <CardText><span className="font-weight-bold text-uppercase">Title:</span> {title}</CardText>
+          <CardText><span className="font-weight-bold text-uppercase">Email:</span> {email}</CardText>
+          <CardText><span className="font-weight-bold text-uppercase">Phone Number:</span> {phone}</CardText>
         </CardBody>
       </div>
     </Card>

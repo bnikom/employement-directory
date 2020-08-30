@@ -13,7 +13,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const employees = useSelector(state => state.employees);
   const [isModalOpen, toggleModal] = useState(false);
-  const [ search, setSearch ] = useState('');
+  const [search, setSearch] = useState('');
 
   useEffect(() => {
     dispatch(fetchAllEmployees());
@@ -29,22 +29,28 @@ const Home = () => {
   } = employees.data;
 
   const handleSearch = async () => {
-    await  dispatch(fetchAllEmployees(search));
+    await dispatch(fetchAllEmployees(search));
   }
 
   return (
     <Container>
-      <FormGroup>
-        <Label for="employeeSearch">Search</Label>
-        <Input
-          type="search"
-          name="employeeSearch"
-          placeholder="search employee directory"
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-        />
-      </FormGroup>
-      <Button onClick={() => handleSearch()}>Search</Button>
+      <Row>
+        <Col xs={9}>
+          <FormGroup>
+            <Label for="employeeSearch" className="sr-only">Search directory by department, name, email or title</Label>
+            <Input
+              type="search"
+              name="employeeSearch"
+              placeholder="Search directory by department, name, email or title"
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+            />
+          </FormGroup>
+        </Col>
+        <Col xs={3}>
+          <Button onClick={() => handleSearch()}>Search</Button>
+        </Col>
+      </Row>
       <Button onClick={() => toggleModal(!isModalOpen)}>Add Employee</Button>
       <Modal isOpen={isModalOpen} toggle={() => toggleModal(!isModalOpen)}>
         <AddEmployee />
@@ -62,7 +68,7 @@ const Home = () => {
           email,
           imageUrl
         }) => (
-            <Col xs={6} key={_id}>
+            <Col xs={6} key={_id} className="d-flex justify-content-center">
               <Link to={`/employee/${_id}`}>
                 <EmployeeCard
                   name={name}

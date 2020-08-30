@@ -36,7 +36,18 @@
   background-color: teal;
   color: white;
   transform: rotateY(180deg);
+  align-items: flex-start;
 }
 .flip-card:hover .inner {
   transform: rotateY(180deg);
+}
+
+header {
+  margin-bottom: 10px;
+  background-color: #172B54;
+}
+
+.header-text {
+  font-size: 4rem;
+  color: #fff;
 }
