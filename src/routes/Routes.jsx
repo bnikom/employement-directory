@@ -11,7 +11,8 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import Header from '../components/Header';
-import User from '../components/User';
+import Home from '../components/Home';
+import Employee from '../components/Employee';
 import reducers from '../reducers';
 
 const Routes = () => {
@@ -26,11 +27,12 @@ const Routes = () => {
           <Route
             exact
             path='/'
+            component={Home}
           />
           <Route
             exact
-            path='/user/:userID'
-            component={User}
+            path='/employee/:userID'
+            component={Employee}
           />
         </Switch>
       </BrowserRouter>

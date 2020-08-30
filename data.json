@@ -1,21 +1,15 @@
 [
   { 
-      "key": "t1",
-      "data":{
-          "name": {
-            "first": "Avril",
-            "last": "Lavigne",
-            "title": "Ms."
-          },
-          "jobTitle": "Software Engineer II",
-          "contact": {
-              "office": "781-000-0102",
-              "mobile": "087-321-0292",
-              "sms": "617-000-002",
-              "email": "alavigne@company.ie"
-          }
+
+          "name": "Avril Lavigne",
+          "title": "Software Engineer II",
+          "office": "781-000-0102",
+          "email": "alavigne@company.ie",
+          "department": "Engineering",
+          "phone": "617-002-2023",
+          "dob": "",
+          "photo":
       }
-  },
   {
       "key": "t2",
       "data":{

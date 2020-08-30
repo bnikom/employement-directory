@@ -1,5 +1,5 @@
-import user from './user.actions';
+import employee from './employee.actions';
 
 export {
-  user,
+  employee,
 };

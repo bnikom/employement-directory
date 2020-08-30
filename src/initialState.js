@@ -1,6 +1,9 @@
 export default () => {
   return {
-    user: {
+    employee: {
+      data: {}
+    },
+    employees: {
       data: {}
     }
   }
