@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardBody, CardImg, CardTitle, CardText, Row, Col } from 'reactstrap';
+import { Card, CardBody, CardImg, CardText, Row, Col } from 'reactstrap';
 
 const EmployeeCard = ({
   name,
@@ -18,7 +18,7 @@ const EmployeeCard = ({
           <CardImg
             top
             className="rounded-circle user-image"
-            src={`https://cors-anywhere.herokuapp.com/${imageUrl}`}
+            src={`http://localhost:8080/${imageUrl}`}
             alt={`${name} Personal Photo`}
             crossOrigin="anonymous"
           />

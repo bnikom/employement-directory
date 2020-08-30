@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ReactLoading from 'react-loading';
 import moment from 'moment';
-import { Row, Col } from 'reactstrap';
+import { Button, Row, Col } from 'reactstrap';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 import { isEmpty } from 'lodash';
 import { fetchUser } from '../actions/employee.actions';
@@ -11,6 +13,7 @@ import EmployeeCard from './EmployeeCard';
 const Employee = ({ match }) => {
   const dispatch = useDispatch();
   const employee = useSelector(state => state.employee);
+  const history = useHistory();
 
   useEffect(() => {
     if (isEmpty(employee)) {
@@ -22,7 +25,13 @@ const Employee = ({ match }) => {
     return <ReactLoading type={'spin'} color={'#0000'} height={667} width={375} />
   }
 
+  const deleteEmployee = async (id) => {
+    await axios.delete(`http://localhost:8080/api/employee/${id}`);
+    history.push('/');
+  }
+
   const {
+    _id,
     name,
     dob,
     department,
@@ -35,23 +44,26 @@ const Employee = ({ match }) => {
   const date = moment(dob).format('MMM D, YYYY')
 
   return (
-    <Row>
-      <Col xs={3}>
-      </Col>
-      <Col xs={6}></Col>
-      <Col>
-        <EmployeeCard
-          name={name}
-          date={date}
-          department={department}
-          title={title}
-          email={email}
-          phone={phone}
-          imageUrl={imageUrl}
-        />
-      </Col>
-      <Col xs={3}></Col>
-    </Row>
+    <Fragment>
+      <Row>
+        <Col xs={{ size: 4, offset: 4 }}>
+          <EmployeeCard
+            name={name}
+            date={date}
+            department={department}
+            title={title}
+            email={email}
+            phone={phone}
+            imageUrl={imageUrl}
+          />
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={{ size: 4, offset: 4 }}>
+          <Button onClick={() => deleteEmployee(_id)}>Delete Employee</Button>
+        </Col>
+      </Row>
+    </Fragment>
   );
 };
 

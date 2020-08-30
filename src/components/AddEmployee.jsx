@@ -1,5 +1,5 @@
 import React , { useState } from 'react';
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, FormText, Label, Input } from 'reactstrap';
 import axios from 'axios';
 
 const AddEmployeeForm = () => {
@@ -9,20 +9,29 @@ const AddEmployeeForm = () => {
   const [ title, setTitle ] = useState('');
   const [ phone, setPhone ] = useState('');
   const [ department, setDepartment ] = useState('Select Department');
+  const [ photo, setPhoto ] = useState(null);
 
   const handleSubmit = async (e) => {
-    await axios.post('http://localhost:8080/api/employees', 
-      {
-        name,
-        title,
-        "dob": date,
-        email,
-        department,
-        phone,
-      }
-    )
-  }
+    const formData = new FormData();
+    
+    formData.append("name", name);
+    formData.append("title", title);
+    formData.append('dob', date);
+    formData.append("email", email);
+    formData.append("phone", phone);
+    formData.append("department", department);
+    formData.append('imageUrl', photo);
 
+    const config = {
+      headers: {
+          'content-type': 'multipart/form-data'
+      }
+    };
+
+    await axios.post('http://localhost:8080/api/employees', formData, config);
+  };
+
+  console.log(photo)
   return (
     <Form className="p-2" onSubmit={e => handleSubmit(e)}>
       <FormGroup>
@@ -90,6 +99,17 @@ const AddEmployeeForm = () => {
           <option>HR</option>
           <option>Customer Care</option>
         </Input>
+      </FormGroup>
+      <FormGroup>
+        <Label for="employeePhoto">File</Label>
+        <Input
+          type="file"
+          name="employeePhoto"
+          onChange={(e) => setPhoto(e.target.files[0])}
+        />
+        <FormText color="muted">
+          Upload Employee Photo
+        </FormText>
       </FormGroup>
       <Button>Submit</Button>
     </Form>

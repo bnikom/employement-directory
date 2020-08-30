@@ -1,5 +1,6 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { fetchAllEmployees } from '../actions/employee.actions';
 import { isEmpty } from 'lodash';
 import { Container, Button, Modal, Row, Col } from 'reactstrap';
@@ -14,9 +15,7 @@ const Home = () => {
   const [isModalOpen, toggleModal] = useState(false);
 
   useEffect(() => {
-    if (isEmpty(employees)) {
-      dispatch(fetchAllEmployees());
-    }
+    dispatch(fetchAllEmployees());
   }, []);
 
   if (isEmpty(employees.data)) {
@@ -37,28 +36,30 @@ const Home = () => {
       <hr />
       <p>Total Employees: {count}</p>
       <Row>
-          {totalEmployees.map(({
-            _id,
-            name,
-            dob,
-            department,
-            title,
-            phone,
-            email
-          }) => (
-            <Col xs={6}>
-              <EmployeeCard
-                key={_id}
-                name={name}
-                date={dob}
-                department={department}
-                title={title}
-                email={email}
-                phone={phone}
-                imageUrl={''}
-              />
-              </Col>
-            ))}
+        {totalEmployees.map(({
+          _id,
+          name,
+          dob,
+          department,
+          title,
+          phone,
+          email,
+          imageUrl
+        }) => (
+            <Col xs={6} key={_id}>
+              <Link to={`/employee/${_id}`}>
+                <EmployeeCard
+                  name={name}
+                  date={dob}
+                  department={department}
+                  title={title}
+                  email={email}
+                  phone={phone}
+                  imageUrl={imageUrl}
+                />
+              </Link>
+            </Col>
+          ))}
       </Row>
     </Container>
   );

@@ -3,13 +3,28 @@ import morgan from 'morgan';
 import cors from 'cors';
 import path from 'path';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
+import multer from 'multer';
 
 import Employee from './api/models/employee';
 dotenv.config();
 
 const port = process.env.PORT || 8080;
 const app = express();
+
+
+// detailed way of storing files
+const storage = multer.diskStorage({
+  destination: function(req,files, callback) {
+    // have to have null as first arg or it will throw an error
+    callback(null, './uploads');
+  },
+  filename: function(req, file, callback) {
+    callback(null, new Date().toISOString() + file.originalname)
+  },
+});
+
+const upload = multer({ storage });
 
 //mention ESM in docs
 mongoose.connect(
@@ -36,13 +51,10 @@ try {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(express.static('public'));
+  app.use('/uploads', express.static('uploads'))
   // app.use((req, res, next) => {
   //   res.sendFile(path.join(__dirname, "public", "index.html"));
   // });
-
-  app.get('/hello', (req, res, next) => {
-    res.json({ message: 'HELLO WORLD' })
-  });
 
   app.get('/api/employees', (req, res, next) => {
     Employee.find()
@@ -68,7 +80,8 @@ try {
     })
   });
 
-  app.post('/api/employees', (req, res, next) => {
+  app.post('/api/employees', upload.single('imageUrl'), (req, res, next) => {
+    console.log(req)
     const employee = new Employee({
       _id: new mongoose.Types.ObjectId(),
       name: req.body.name,
@@ -77,7 +90,7 @@ try {
       title: req.body.title,
       email: req.body.email,
       phone: req.body.phone,
-      imageUrl: req.body.imageUrl,
+      imageUrl: req.file.path,
     });
 
     employee
@@ -119,7 +132,27 @@ try {
           result,
           request: {
             type: 'GET',
-            url: `http://localhost:3000/employees`
+            url: `http://localhost:8080/employees`
+          }
+        });
+      })
+      .catch(error => {
+        res.status(500).json({
+          error
+        })
+    });
+  });
+
+  app.delete('/api/employee/:employeeId', (req, res, next) => {
+    Employee
+      .remove({ _id: req.params.employeeId })
+      .exec()
+      .then(result => {
+        res.status(200).json({
+          message: 'Employee Deleted',
+          request: {
+            type: 'POST',
+            url: 'http://localhost:8080/employees',
           }
         });
       })
