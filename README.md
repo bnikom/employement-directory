@@ -6,8 +6,25 @@ In the project directory, you can run:
 
 ### `yarn start`
 
-Runs the app in the development mode.<br />
+Runs the app client-side and server-side in parallel.<br />
+Open [http://localhost:3000](http://localhost:3000) to view the client side application.
+Open [http://localhost:8080](http://localhost:8080) to view any APIs in the browser.
+
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
+
+### `yarn client`
+
+Runs the client side React app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
+
+### `yarn server`
+
+Runs the server side Node app in the development mode.<br />
+Open [http://localhost:8080](http://localhost:8080) to view any APIs in the browser.
 
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
