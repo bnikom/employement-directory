@@ -1,42 +1,70 @@
-import React , { useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Form, FormGroup, FormText, Label, Input } from 'reactstrap';
 import axios from 'axios';
 
-const AddEmployeeForm = ({ setFormSubmit, toggleModal }) => {
-  const [ name, setName ] = useState('');
-  const [ email, setEmail ] = useState('');
-  const [ date, setDate ] = useState('');
-  const [ title, setTitle ] = useState('');
-  const [ phone, setPhone ] = useState('');
-  const [ department, setDepartment ] = useState('Select Department');
-  const [ photo, setPhoto ] = useState(null);
+const AddEmployeeForm = ({
+  setFormSubmit,
+  toggleModal,
+  nameProp,
+  titleProp,
+  departmentProp,
+  phoneProp,
+  emailProp,
+  dateProp,
+  photoProp,
+  type,
+  id,
+}) => {
+  const [name, setName] = useState(nameProp || '');
+  const [email, setEmail] = useState(emailProp || '');
+  const [date, setDate] = useState(dateProp || '');
+  const [title, setTitle] = useState(titleProp || '');
+  const [phone, setPhone] = useState(phoneProp || '');
+  const [department, setDepartment] = useState(departmentProp || 'Select Department');
+  const [photo, setPhoto] = useState(null);
 
+  console.log(date)
   // TODO: should i keep the select department????
   const handleSubmit = async (e) => {
     try {
-      const formData = new FormData();
-    
-      formData.append("name", name);
-      formData.append("title", title);
-      formData.append('dob', date);
-      formData.append("email", email);
-      formData.append("phone", phone);
-      formData.append("department", department);
-      formData.append('imageUrl', photo);
-  
-      const config = {
-        headers: {
+      if (type === 'update') {
+        const updateArgs = {};
+
+        if (name !== '' || name !== nameProp) updateArgs.name = name;
+        if (title !== '' || title !== titleProp) updateArgs.title = title;
+        if (date !== '' || date !== dateProp) updateArgs.dob = date;
+        if (email !== '' || email !== emailProp) updateArgs.email = email
+        if (phone !== '' || phone !== phoneProp) updateArgs.phone = phone;
+        if (department !== '' || department !== departmentProp) updateArgs.department = department;
+        if (photo) updateArgs.imageUrl = photo;
+
+        await axios.patch(`http://localhost:8080/api/employee/${id}`, updateArgs);
+      } else {
+        const formData = new FormData();
+
+        formData.append("name", name);
+        formData.append("title", title);
+        formData.append('dob', date);
+        formData.append("email", email);
+        formData.append("phone", phone);
+        formData.append("department", department);
+        formData.append('imageUrl', photo);
+
+        // Display the values
+        const config = {
+          headers: {
             'content-type': 'multipart/form-data'
-        }
-      };
-  
-      await axios.post('http://localhost:8080/api/employees', formData, config);
+          }
+        };
+
+        await axios.post('http://localhost:8080/api/employees', formData, config);
+      }
       setFormSubmit(prevSubmit => !prevSubmit);
       toggleModal(prevToggle => !prevToggle);
     } catch (error) {
       console.log(error)
     }
-   
+
   };
 
   return (

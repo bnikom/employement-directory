@@ -36,9 +36,9 @@ const Home = () => {
   return (
     <Container>
       <Row>
-        <Col xs={9}>
+        <Col xs={8}>
           <FormGroup>
-            <Label for="employeeSearch" className="sr-only">Search directory by department, name, email or title</Label>
+            <Label className="sr-only" for="employeeSearch">Search directory by department, name, email or title</Label>
             <Input
               type="search"
               name="employeeSearch"
@@ -48,11 +48,15 @@ const Home = () => {
             />
           </FormGroup>
         </Col>
-        <Col xs={3}>
-          <Button onClick={() => handleSearch()}>Search</Button>
+        <Col xs={4}>
+          <Button outline color="secondary" className="w-100" onClick={() => handleSearch()}>Search</Button>
         </Col>
       </Row>
-      <Button onClick={() => toggleModal(!isModalOpen)}>Add Employee</Button>
+      <Row>
+        <Col xs={{ size: 4, offset: 8 }}>
+          <Button className="w-100" onClick={() => toggleModal(!isModalOpen)}>Add Employee</Button>
+        </Col>
+      </Row>
       <Modal isOpen={isModalOpen} toggle={() => toggleModal(!isModalOpen)}>
         <AddEmployee
           setFormSubmit={setFormSubmit}

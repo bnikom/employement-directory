@@ -117,7 +117,7 @@ try {
             imageUrl: result.imageUrl,
             links: {
               type: 'GET',
-              url: `http://localhost:8080/employee/${result._id}`
+              url: `http://localhost:8080/api/employee/${result._id}`
             }
           },
         });
@@ -126,7 +126,6 @@ try {
         console.log(error)
         res.status(500).json({ error });
       });
-      // res.redirect('http://localhost:3000/');
   });
 
   app.get('/api/employee/:employeeId', (req, res, next) => {
@@ -140,7 +139,7 @@ try {
           result,
           request: {
             type: 'GET',
-            url: `http://localhost:8080/employees`
+            url: `http://localhost:8080/api/employees`
           }
         });
       })
@@ -160,7 +159,7 @@ try {
           message: 'Employee Deleted',
           request: {
             type: 'POST',
-            url: 'http://localhost:8080/employees',
+            url: 'http://localhost:8080/api/employees',
           }
         });
       })
@@ -170,6 +169,22 @@ try {
         })
     });
   });
+
+  app.patch('/api/employee/:employeeId', (req, res, next) => {
+    console.log(req.body)
+    Employee.update({ _id: req.params.employeeId} , { $set: req.body })
+      .exec()
+      .then(result => {
+        res.status(200).json({
+          message: 'Employee Updated',
+          url: `http://localhost:8080/api/employee/${req.params.employeeId}`
+        });
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(500).json({ error });
+      });
+  })
 
   app.use((req, res, next) => {
     throw { status: 404 }

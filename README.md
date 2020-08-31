@@ -54,32 +54,18 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+Technologies Used:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Express: A framework for Node to run the back end portion of the application
+Reactstrap: React Components styled using Bootstrap 4. Saves me tons of time on building components
+Bootstrap 4: Great CSS Framework that again saves me tons of time on styling my components. And it uses flexbox!!
+Axios: Promise-based HTTP client that is super easy to use and has great out-of-the-box features in its API.
+MongoDB: popular nonrelational DB for storing our employees.
+Mongoose: easy to use mongodb schema model. 
+Multer: popular file uplaod library
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Things I would change/add
+I did not have time to fully implement all of the testing features I wanted. I unfortuantely learned that I can't do Node API testing with jest in this app because create-react-app does not allow to change the jest testing environment in the package.json. I also didn't write an UPDATE/PUT request to change a user, but I felt the CSS and search made up from missing this feature.
+I wrote the nifty CSS twirl
 
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+I wish I had time for more validation in my form. I just didn't feel like I wanted to spend the time. There's some validation in how Mongoose accepts values into the schema, but I could always improve it. If I wanted to be super fancy I could have made another database to store the images uploaded, but again I felt storing them on the server worked just fine and wanted to put my efforts elsewhere.

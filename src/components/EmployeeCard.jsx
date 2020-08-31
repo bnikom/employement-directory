@@ -21,7 +21,7 @@ const EmployeeCard = ({
         <CardBody className="front">
           <CardImg
             top
-            className="rounded-circle user-image"
+            className="rounded-circle employee-image"
             src={`http://localhost:8080/${photo}`}
             alt={`${name} Personal Photo`}
             crossOrigin="anonymous"
@@ -29,7 +29,7 @@ const EmployeeCard = ({
         </CardBody>
         <CardBody className="back">
           <CardText><span className="font-weight-bold text-uppercase">Name:</span> {name}</CardText>
-          <CardText><span className="font-weight-bold text-uppercase">DOB:</span> {moment(date).format('MMM D, YYYY')}</CardText>
+          <CardText><span className="font-weight-bold text-uppercase">DOB:</span> {moment(date.replace('T00:00:00.000Z', '')).format('MMM DD, YYYY')}</CardText>
           <CardText><span className="font-weight-bold text-uppercase">Department:</span> {department}</CardText>
           <CardText><span className="font-weight-bold text-uppercase">Title:</span> {title}</CardText>
           <CardText><span className="font-weight-bold text-uppercase">Email:</span> {email}</CardText>

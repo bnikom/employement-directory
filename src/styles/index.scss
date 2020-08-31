@@ -1,8 +1,8 @@
 @import '~bootstrap/scss/bootstrap.scss';
 
-$blue-header: #172B54; 
+$blue-header: #172B54;
 
-.user-image {
+.employee-image {
   width: 80%;
   height: 80%;
   object-fit: cover;
@@ -14,6 +14,7 @@ $blue-header: #172B54;
   height: 300px;
   perspective: 1000px;
 }
+
 .flip-card .inner {
   position: relative;
   width: 100%;
@@ -21,6 +22,7 @@ $blue-header: #172B54;
   transition: transform 0.8s;
   transform-style: preserve-3d;
 }
+
 .flip-card .inner .front,
 .flip-card .inner .back {
   position: absolute;
@@ -33,15 +35,18 @@ $blue-header: #172B54;
   justify-content: center;
   flex-direction: column;
 }
+
 .flip-card .inner .front {
   background-color: #bbb;
 }
+
 .flip-card .inner .back {
   background-color: teal;
   color: white;
   transform: rotateY(180deg);
   align-items: flex-start;
 }
+
 .flip-card:hover .inner {
   transform: rotateY(180deg);
 }
@@ -57,9 +62,21 @@ header {
   .header-text {
     font-size: 9vw;
     color: #fff;
-  
+
     &:hover {
       color: $blue-header;
+    }
+  }
+}
+
+.employee-page {
+  .flip-card {
+    width: 40vw;
+    height: 40vw;
+
+    .back {
+      background-color: #933601;
+      font-size: 2.3vw;
     }
   }
 }
