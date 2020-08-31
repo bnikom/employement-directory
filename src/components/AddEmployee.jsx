@@ -23,13 +23,13 @@ const AddEmployeeForm = ({
   const [department, setDepartment] = useState(departmentProp || 'Select Department');
   const [photo, setPhoto] = useState(null);
 
-  console.log(date)
   // TODO: should i keep the select department????
   const handleSubmit = async (e) => {
     try {
       if (type === 'update') {
         const updateArgs = {};
 
+        // can't send form data over a patch request
         if (name !== '' || name !== nameProp) updateArgs.name = name;
         if (title !== '' || title !== titleProp) updateArgs.title = title;
         if (date !== '' || date !== dateProp) updateArgs.dob = date;
@@ -50,7 +50,7 @@ const AddEmployeeForm = ({
         formData.append("department", department);
         formData.append('imageUrl', photo);
 
-        // Display the values
+        // necessary config for form data
         const config = {
           headers: {
             'content-type': 'multipart/form-data'
@@ -59,7 +59,10 @@ const AddEmployeeForm = ({
 
         await axios.post('http://localhost:8080/api/employees', formData, config);
       }
+
+      // reset the state on the parent component
       setFormSubmit(prevSubmit => !prevSubmit);
+      // close modal
       toggleModal(prevToggle => !prevToggle);
     } catch (error) {
       console.log(error)
