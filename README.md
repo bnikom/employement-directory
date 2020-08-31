@@ -44,9 +44,9 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## Technologies Used:
+## Main Technologies Used:
 
-#### Express:
+##### Express:
 A framework for Node to run the back end portion of the application
 #### ESM
 ES6 module loader for Node
@@ -63,12 +63,13 @@ easy to use mongodb schema model.
 #### Multer:
 popular file uplaod library
 
-## Things I would add in the future
-I did not have time to fully implement all of the testing features I wanted. I unfortunately learned that I can't do Node API testing with jest in this app because create-react-app does not allow changing the jest testing environment in package.json.
+## To add for future development
+1. **TESTING** I did not have time to fully implement all of the testing features I wanted. I unfortunately learned that I can't do Node API testing with jest in this app because create-react-app does not allow changing the jest testing environment in package.json.
+   
+2. **VALIDATION** I did not include any validation in the form for submitting or updating an employee. In the future you would need validation for submitting the required fields, date validation etc. to make this a fully functioning directory. There's some validation in how Mongoose accepts values into the schema, but I could always improve it. If I wanted to be super fancy I could have made another database to store the images uploaded, but again I felt storing them on the server worked just fine and wanted to put my efforts elsewhere.
+   
+3. **PROP-TYPES** Usually I prefer having some sort of type checker, but due to time constraints I did not. In the future they would be useful.
 
-I did not include any validation in the form for submitting or updating an employee. In the future you would need validation for submitting the required fields, date validation etc. to make this a fully functioning directory. here's some validation in how Mongoose accepts values into the schema, but I could always improve it. If I wanted to be super fancy I could have made another database to store the images uploaded, but again I felt storing them on the server worked just fine and wanted to put my efforts elsewhere.
-
-Add proptypes
-
-## Things I would improve or change
-I don't think I necessarily needed to use Redux in this project, but I already committed to the decision. In the future I would improve the responsiveness of the site. Adding some media queries or a uniform css style would be nice.
+## Improvements/Changes
+1. I don't think I necessarily needed to use Redux in this project, but I already committed to the decision.
+2. Improve the responsiveness of the site. Adding some media queries for a uniform UI experience would be nice.

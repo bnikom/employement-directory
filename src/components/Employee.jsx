@@ -57,7 +57,7 @@ const Employee = ({ match }) => {
   return (
     <Fragment>
       <Row className="justify-content-center mb-2 employee-page">
-        <Col xs={10} md={6} className="justify-content-center d-flex">
+        <Col sm={12} md={6} className="justify-content-center d-flex">
           <EmployeeCard
             date={date}
             department={department}

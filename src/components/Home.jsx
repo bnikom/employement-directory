@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchAllEmployees } from '../actions/employee.actions';
+import { fetchEmployees } from '../actions/employee.actions';
 import { isEmpty } from 'lodash';
 import { Container, Button, Modal, Row, Col, FormGroup, Label, Input } from 'reactstrap';
 import ReactLoading from 'react-loading';
@@ -18,7 +18,7 @@ const Home = () => {
 
   // fetch employees on initial page load and when you submit a form
   useEffect(() => {
-    dispatch(fetchAllEmployees());
+    dispatch(fetchEmployees());
   }, [formSubmitted, dispatch]);
 
   // show spinning wheel if no data
@@ -33,7 +33,13 @@ const Home = () => {
 
   // fetch employees when from search query
   const handleSearch = async () => {
-    await dispatch(fetchAllEmployees(search));
+    await dispatch(fetchEmployees(search));
+  }
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+    }
   }
 
   return (
@@ -47,12 +53,20 @@ const Home = () => {
               name="employeeSearch"
               placeholder="Search directory by department, name, email or title"
               value={search}
+              onKeyUp={e => handleKeyPress(e)}
               onChange={e => setSearch(e.target.value)}
             />
           </FormGroup>
         </Col>
         <Col xs={4}>
-          <Button outline color="secondary" className="w-100" onClick={() => handleSearch()}>Search</Button>
+          <Button
+            outline
+            color="secondary"
+            className="w-100"
+            onClick={() => handleSearch()}
+          >
+            Search
+          </Button>
         </Col>
       </Row>
       <Row>
@@ -96,6 +110,6 @@ const Home = () => {
       </Row>
     </Container>
   );
-}
+};
 
 export default Home;

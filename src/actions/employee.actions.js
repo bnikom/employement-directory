@@ -14,7 +14,6 @@ export const fetchUser = (employeeId) => async (dispatch, getState) => {
   try {
     const response = await axios.get(`http://localhost:8080/api/employee/${employeeId}`)
 
-    console.log(response)
     dispatch({
       type: FETCH_USER_SUCCESS,
       payload: response.data,
@@ -30,7 +29,7 @@ export const fetchUser = (employeeId) => async (dispatch, getState) => {
 
 
 // fetch employee search or all employees
-export const fetchAllEmployees = (searchTerm = '') => async (dispatch, getState) => {
+export const fetchEmployees = (searchTerm = '') => async (dispatch, getState) => {
   dispatch({ type: FETCH_EMPLOYEES_LOADING })
   try {
     const response = await axios.get(`http://localhost:8080/api/employees?searchTerm=${searchTerm}`);
