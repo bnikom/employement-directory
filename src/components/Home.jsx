@@ -64,24 +64,24 @@ const Home = () => {
       <Row>
         {totalEmployees.map(({
           _id,
-          name,
           dob,
           department,
-          title,
-          phone,
           email,
-          imageUrl
+          imageUrl,
+          name,
+          phone,
+          title,
         }) => (
-            <Col xs={6} key={_id} className="d-flex justify-content-center">
+            <Col sm={12} md={6} lg={4} key={_id} className="d-flex justify-content-center mb-3">
               <Link to={`/employee/${_id}`}>
                 <EmployeeCard
-                  name={name}
                   date={dob}
                   department={department}
-                  title={title}
                   email={email}
+                  photo={imageUrl}
+                  name={name}
                   phone={phone}
-                  imageUrl={imageUrl}
+                  title={title}
                 />
               </Link>
             </Col>

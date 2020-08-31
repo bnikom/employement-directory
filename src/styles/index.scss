@@ -1,5 +1,7 @@
 @import '~bootstrap/scss/bootstrap.scss';
 
+$blue-header: #172B54; 
+
 .user-image {
   width: 80%;
   height: 80%;
@@ -46,10 +48,18 @@
 
 header {
   margin-bottom: 10px;
-  background-color: #172B54;
-}
+  background-color: $blue-header;
 
-.header-text {
-  font-size: 4rem;
-  color: #fff;
+  &:hover {
+    background-color: #fff;
+  }
+
+  .header-text {
+    font-size: 9vw;
+    color: #fff;
+  
+    &:hover {
+      color: $blue-header;
+    }
+  }
 }

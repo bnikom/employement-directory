@@ -9,6 +9,8 @@ import multer from 'multer';
 import Employee from './api/models/employee';
 dotenv.config();
 
+// didn't do media queries
+
 const port = process.env.PORT || 8080;
 const app = express();
 

@@ -1,7 +1,6 @@
 import React , { useState } from 'react';
 import { Button, Form, FormGroup, FormText, Label, Input } from 'reactstrap';
 import axios from 'axios';
-import { useHistory, withRouter } from 'react-router-dom';
 
 const AddEmployeeForm = ({ setFormSubmit, toggleModal }) => {
   const [ name, setName ] = useState('');
@@ -11,28 +10,33 @@ const AddEmployeeForm = ({ setFormSubmit, toggleModal }) => {
   const [ phone, setPhone ] = useState('');
   const [ department, setDepartment ] = useState('Select Department');
   const [ photo, setPhoto ] = useState(null);
-  const history = useHistory();
 
+  // TODO: should i keep the select department????
   const handleSubmit = async (e) => {
-    const formData = new FormData();
+    try {
+      const formData = new FormData();
     
-    formData.append("name", name);
-    formData.append("title", title);
-    formData.append('dob', date);
-    formData.append("email", email);
-    formData.append("phone", phone);
-    formData.append("department", department);
-    formData.append('imageUrl', photo);
-
-    const config = {
-      headers: {
-          'content-type': 'multipart/form-data'
-      }
-    };
-
-    await axios.post('http://localhost:8080/api/employees', formData, config);
-    setFormSubmit(prevSubmit => !prevSubmit);
-    toggleModal(prevToggle => !prevToggle);
+      formData.append("name", name);
+      formData.append("title", title);
+      formData.append('dob', date);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("department", department);
+      formData.append('imageUrl', photo);
+  
+      const config = {
+        headers: {
+            'content-type': 'multipart/form-data'
+        }
+      };
+  
+      await axios.post('http://localhost:8080/api/employees', formData, config);
+      setFormSubmit(prevSubmit => !prevSubmit);
+      toggleModal(prevToggle => !prevToggle);
+    } catch (error) {
+      console.log(error)
+    }
+   
   };
 
   return (
@@ -104,10 +108,10 @@ const AddEmployeeForm = ({ setFormSubmit, toggleModal }) => {
         </Input>
       </FormGroup>
       <FormGroup>
-        <Label for="imageUrl">File</Label>
+        <Label for="photo">File</Label>
         <Input
           type="file"
-          name="imageUrl"
+          name="photo"
           onChange={(e) => setPhoto(e.target.files[0])}
         />
         <FormText color="muted">

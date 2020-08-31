@@ -3,15 +3,15 @@ import { Card, CardBody, CardImg, CardText } from 'reactstrap';
 import moment from 'moment';
 
 const EmployeeCard = ({
-  name,
   date,
   department,
-  title,
   email,
+  fontSize,
+  photo,
+  name,
   phone,
-  imageUrl,
   size,
-  fontSize
+  title,
 }) => (
     <Card
       className="d-flex justify-content-center align-items-center flip-card"
@@ -22,7 +22,7 @@ const EmployeeCard = ({
           <CardImg
             top
             className="rounded-circle user-image"
-            src={`http://localhost:8080/${imageUrl}`}
+            src={`http://localhost:8080/${photo}`}
             alt={`${name} Personal Photo`}
             crossOrigin="anonymous"
           />

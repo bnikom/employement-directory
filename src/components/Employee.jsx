@@ -23,40 +23,46 @@ const Employee = ({ match }) => {
   }
 
   const deleteEmployee = async (id) => {
-    await axios.delete(`http://localhost:8080/api/employee/${id}`);
-    history.push('/');
+    try {
+      await axios.delete(`http://localhost:8080/api/employee/${id}`);
+      history.push('/');
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const {
-    _id,
-    name,
+    _id, 
     dob,
     department,
-    title,
-    email,
-    phone,
     imageUrl,
+    email,
+    name,
+    phone,
+    title,
   } = employee.data.result;
+
+  console.log(employee.data)
 
   return (
     <Fragment>
       <Row className="justify-content-center mb-2">
-        <Col xs={6} className="justify-content-center d-flex">
+        <Col xs={10} md={6} className="justify-content-center d-flex">
           <EmployeeCard
-            size={'40vw'}
-            fontSize={'1.6rem'}
-            name={name}
             date={dob}
             department={department}
-            title={title}
             email={email}
+            fontSize={'2.3vw'}
+            photo={imageUrl}
+            name={name}
             phone={phone}
-            imageUrl={imageUrl}
+            size={'40vw'}
+            title={title}
           />
         </Col>
       </Row>
-      <Row>
-        <Col xs={{ size: 4, offset: 4 }}>
+      <Row className="justify-content-center">
+        <Col xs={6} sm={4} className="justify-content-center d-flex">
           <Button onClick={() => deleteEmployee(_id)}>Delete Employee</Button>
         </Col>
       </Row>
