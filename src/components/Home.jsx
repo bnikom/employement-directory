@@ -16,10 +16,12 @@ const Home = () => {
   const [search, setSearch] = useState('');
   const [formSubmitted, setFormSubmit] = useState(false);
 
+  // fetch employees on initial page load and when you submit a form
   useEffect(() => {
     dispatch(fetchAllEmployees());
   }, [formSubmitted, dispatch]);
 
+  // show spinning wheel if no data
   if (isEmpty(employees.data)) {
     return <ReactLoading type={'spin'} color={'#0000'} height={667} width={375} />
   }
@@ -29,6 +31,7 @@ const Home = () => {
     employees: totalEmployees,
   } = employees.data;
 
+  // fetch employees when from search query
   const handleSearch = async () => {
     await dispatch(fetchAllEmployees(search));
   }
@@ -79,7 +82,7 @@ const Home = () => {
             <Col sm={12} md={6} lg={4} key={_id} className="d-flex justify-content-center mb-3">
               <Link to={`/employee/${_id}`}>
                 <EmployeeCard
-                  date={dob}
+                  date={dob.replace('T00:00:00.000Z', '')}
                   department={department}
                   email={email}
                   photo={imageUrl}

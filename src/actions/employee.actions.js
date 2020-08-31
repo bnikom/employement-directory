@@ -8,14 +8,16 @@ import {
   FETCH_EMPLOYEES_SUCCESS,
 } from '../constants'
 
+// fetch indiv user from node api
 export const fetchUser = (employeeId) => async (dispatch, getState) => {
   dispatch({ type: FETCH_USER_LOADING })
   try {
-    const userResponse = await axios.get(`http://localhost:8080/api/employee/${employeeId}`)
+    const response = await axios.get(`http://localhost:8080/api/employee/${employeeId}`)
 
+    console.log(response)
     dispatch({
       type: FETCH_USER_SUCCESS,
-      payload: userResponse.data,
+      payload: response.data,
     });
   } catch (error) {
 
@@ -26,6 +28,8 @@ export const fetchUser = (employeeId) => async (dispatch, getState) => {
   }
 };
 
+
+// fetch employee search or all employees
 export const fetchAllEmployees = (searchTerm = '') => async (dispatch, getState) => {
   dispatch({ type: FETCH_EMPLOYEES_LOADING })
   try {

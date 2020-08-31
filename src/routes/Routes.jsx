@@ -19,6 +19,7 @@ const Routes = () => {
   const context = {};
   const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
 
+  // client-side routing for application
   return (
     <Provider store={store}>
       <BrowserRouter context={context}>
@@ -31,7 +32,7 @@ const Routes = () => {
           />
           <Route
             exact
-            path='/employee/:userID'
+            path='/employee/:employeeID'
             component={Employee}
           />
         </Switch>

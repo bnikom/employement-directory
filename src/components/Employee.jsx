@@ -17,14 +17,20 @@ const Employee = ({ match }) => {
   const [isModalOpen, toggleModal] = useState(false);
   const [formSubmitted, setFormSubmit] = useState(false);
 
+
+  // fetch employee on initial page load and when form is submitted
   useEffect(() => {
-    dispatch(fetchUser(match.params.userID));
+    console.log('in here')
+    dispatch(fetchUser(match.params.employeeID));
   }, [match, dispatch, formSubmitted]);
+
+  console.log(employee)
 
   if (isEmpty(employee.data)) {
     return <ReactLoading type={'spin'} color={'#0000'} height={667} width={375} />
   }
 
+  // delete employee and redirect to the homepage
   const deleteEmployee = async (id) => {
     try {
       await axios.delete(`http://localhost:8080/api/employee/${id}`);
@@ -45,12 +51,15 @@ const Employee = ({ match }) => {
     title,
   } = employee.data.result;
 
+  // for some reason the mongoose date schema does not trim the seconds/hours so I just do that here
+  const date = dob.replace('T00:00:00.000Z', '');
+
   return (
     <Fragment>
       <Row className="justify-content-center mb-2 employee-page">
         <Col xs={10} md={6} className="justify-content-center d-flex">
           <EmployeeCard
-            date={dob}
+            date={date}
             department={department}
             email={email}
             photo={imageUrl}
@@ -74,10 +83,9 @@ const Employee = ({ match }) => {
         <AddEmployee
           setFormSubmit={setFormSubmit}
           toggleModal={toggleModal}
-          dateProp={dob}
+          dateProp={date}
           departmentProp={department}
           emailProp={email}
-          photoProp={imageUrl}
           nameProp={name}
           phoneProp={phone}
           titleProp={title}

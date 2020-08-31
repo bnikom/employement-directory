@@ -11,10 +11,11 @@ const AddEmployeeForm = ({
   phoneProp,
   emailProp,
   dateProp,
-  photoProp,
   type,
   id,
 }) => {
+  // set valaues in form either to be empty (when adding a new user)
+  // or use existing value (when updating a user)
   const [name, setName] = useState(nameProp || '');
   const [email, setEmail] = useState(emailProp || '');
   const [date, setDate] = useState(dateProp || '');
@@ -23,19 +24,19 @@ const AddEmployeeForm = ({
   const [department, setDepartment] = useState(departmentProp || 'Select Department');
   const [photo, setPhoto] = useState(null);
 
-  // TODO: should i keep the select department????
   const handleSubmit = async (e) => {
     try {
       if (type === 'update') {
         const updateArgs = {};
 
         // can't send form data over a patch request
+        // only add key to object if a new value has been added (not empty or preexisting value)
         if (name !== '' || name !== nameProp) updateArgs.name = name;
         if (title !== '' || title !== titleProp) updateArgs.title = title;
         if (date !== '' || date !== dateProp) updateArgs.dob = date;
         if (email !== '' || email !== emailProp) updateArgs.email = email
         if (phone !== '' || phone !== phoneProp) updateArgs.phone = phone;
-        if (department !== '' || department !== departmentProp) updateArgs.department = department;
+        if (department !== 'Select Department' || department !== departmentProp) updateArgs.department = department;
         if (photo) updateArgs.imageUrl = photo;
 
         await axios.patch(`http://localhost:8080/api/employee/${id}`, updateArgs);

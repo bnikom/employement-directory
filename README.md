@@ -44,28 +44,31 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+## Technologies Used:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### Express:
+A framework for Node to run the back end portion of the application
+#### ESM
+ES6 module loader for Node
+#### Reactstrap:
+React Components styled using Bootstrap 4. Saves me tons of time on building components
+#### Bootstrap 4:
+Great CSS Framework that again saves me tons of time on styling my components. And it uses flexbox!!
+#### Axios:
+Promise-based HTTP client that is super easy to use and has great out-of-the-box features in its API.
+#### MongoDB:
+popular nonrelational DB for storing the employees.
+#### Mongoose:
+easy to use mongodb schema model. 
+#### Multer:
+popular file uplaod library
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Things I would add in the future
+I did not have time to fully implement all of the testing features I wanted. I unfortunately learned that I can't do Node API testing with jest in this app because create-react-app does not allow changing the jest testing environment in package.json.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+I did not include any validation in the form for submitting or updating an employee. In the future you would need validation for submitting the required fields, date validation etc. to make this a fully functioning directory. here's some validation in how Mongoose accepts values into the schema, but I could always improve it. If I wanted to be super fancy I could have made another database to store the images uploaded, but again I felt storing them on the server worked just fine and wanted to put my efforts elsewhere.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Add proptypes
 
-Technologies Used:
-
-Express: A framework for Node to run the back end portion of the application
-Reactstrap: React Components styled using Bootstrap 4. Saves me tons of time on building components
-Bootstrap 4: Great CSS Framework that again saves me tons of time on styling my components. And it uses flexbox!!
-Axios: Promise-based HTTP client that is super easy to use and has great out-of-the-box features in its API.
-MongoDB: popular nonrelational DB for storing our employees.
-Mongoose: easy to use mongodb schema model. 
-Multer: popular file uplaod library
-
-Things I would change/add
-I did not have time to fully implement all of the testing features I wanted. I unfortuantely learned that I can't do Node API testing with jest in this app because create-react-app does not allow to change the jest testing environment in the package.json. I also didn't write an UPDATE/PUT request to change a user, but I felt the CSS and search made up from missing this feature.
-I wrote the nifty CSS twirl
-
-I wish I had time for more validation in my form. I just didn't feel like I wanted to spend the time. There's some validation in how Mongoose accepts values into the schema, but I could always improve it. If I wanted to be super fancy I could have made another database to store the images uploaded, but again I felt storing them on the server worked just fine and wanted to put my efforts elsewhere.
+## Things I would improve or change
+I don't think I necessarily needed to use Redux in this project, but I already committed to the decision. In the future I would improve the responsiveness of the site. Adding some media queries or a uniform css style would be nice.

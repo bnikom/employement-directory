@@ -6,16 +6,13 @@ const EmployeeCard = ({
   date,
   department,
   email,
-  fontSize,
   photo,
   name,
   phone,
-  size,
   title,
 }) => (
     <Card
       className="d-flex justify-content-center align-items-center flip-card"
-      style={{ width: size, height: size, fontSize }}
     >
       <div className="inner">
         <CardBody className="front">
@@ -29,7 +26,7 @@ const EmployeeCard = ({
         </CardBody>
         <CardBody className="back">
           <CardText><span className="font-weight-bold text-uppercase">Name:</span> {name}</CardText>
-          <CardText><span className="font-weight-bold text-uppercase">DOB:</span> {moment(date.replace('T00:00:00.000Z', '')).format('MMM DD, YYYY')}</CardText>
+          <CardText><span className="font-weight-bold text-uppercase">DOB:</span> {moment(date).format('MMM DD, YYYY')}</CardText>
           <CardText><span className="font-weight-bold text-uppercase">Department:</span> {department}</CardText>
           <CardText><span className="font-weight-bold text-uppercase">Title:</span> {title}</CardText>
           <CardText><span className="font-weight-bold text-uppercase">Email:</span> {email}</CardText>

@@ -6,7 +6,7 @@ import {
 const Header = () => {
   return (
     <header>
-      <NavbarBrand href='/' className="text-uppercase header-text"> Employee Directory</NavbarBrand>
+      <NavbarBrand href='/' className="text-uppercase header-text">Employee Directory</NavbarBrand>
     </header>
   );
 };

@@ -9,9 +9,10 @@ const router = express.Router();
 // detailed way of storing files
 const storage = multer.diskStorage({
   destination: function(req,files, callback) {
-    // have to have null as first arg or it will throw an error
+    // where to save files on disk
     callback(null, './uploads');
   },
+  // filename is just the date and time the file was posted and the original filename
   filename: function(req, file, callback) {
     callback(null, new Date().toISOString() + file.originalname)
   },
@@ -19,8 +20,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+// get and search ALL employees
 router.get('/employees', (req, res, next) => {
   let query = {};
+  // create query for search in DB if term exists
   if(req.query.searchTerm) {
     query = { $or:[
       { name:{$regex: req.query.searchTerm, $options: 'i'}},
@@ -52,7 +55,10 @@ router.get('/employees', (req, res, next) => {
   })
 });
 
+// create new employee
+// multer middleware to upload + save the photo file
 router.post('/employees', upload.single('imageUrl'), (req, res, next) => {
+  // create the new schema
   const employee = new Employee({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
@@ -69,7 +75,7 @@ router.post('/employees', upload.single('imageUrl'), (req, res, next) => {
     .then(result => {
       res.status(201).json({
         message: 'created employee successfully',
-        createdProduct: {
+        createdEmployee: {
           _id: new mongoose.Types.ObjectId(),
           name: result.name,
           dob: result.dob,
@@ -92,6 +98,7 @@ router.post('/employees', upload.single('imageUrl'), (req, res, next) => {
     });
 });
 
+// get individual employee
 router.get('/employee/:employeeId', (req, res, next) => {
   Employee.findById(req.params.employeeId)
     .exec()
@@ -114,6 +121,7 @@ router.get('/employee/:employeeId', (req, res, next) => {
   });
 });
 
+// delete employee based on id
 router.delete('/employee/:employeeId', (req, res, next) => {
   Employee
     .remove({ _id: req.params.employeeId })
@@ -134,8 +142,10 @@ router.delete('/employee/:employeeId', (req, res, next) => {
   });
 });
 
+// update employee info
 router.patch('/employee/:employeeId', (req, res, next) => {
-  Employee.update({ _id: req.params.employeeId} , { $set: req.body })
+  // tell mongoose which employee to update and what fields
+  Employee.updateOne({ _id: req.params.employeeId} , { $set: req.body })
     .exec()
     .then(result => {
       res.status(200).json({
