@@ -8,28 +8,28 @@ $blue-header: #172B54;
   object-fit: cover;
 }
 
+// css animation for flipping the card
 .flip-card {
   background-color: transparent;
   width: 310px;
   height: 310px;
-  perspective: 1000px;
+  perspective: 1000px; // 3D flip
 
   .inner {
     position: relative;
     width: 100%;
     height: 100%;
-    transition: transform 1s;
-    transform-style: preserve-3d;
+    transition: transform 1s; // time for transition
+    transform-style: preserve-3d; // pass perspective to children
 
     .front {
       background-color: #bbb;
-      align-items: center;
     }
 
     .back {
       background-color: teal;
       color: white;
-      transform: rotateY(180deg);
+      transform: rotateY(180deg); // rotate
       align-items: flex-start;
     }
 
@@ -37,7 +37,7 @@ $blue-header: #172B54;
       position: absolute;
       width: 100%;
       height: 100%;
-      -webkit-backface-visibility: hidden;
+      -webkit-backface-visibility: hidden; // hide back of card
       backface-visibility: hidden;
       display: flex;
       justify-content: center;

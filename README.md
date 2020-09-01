@@ -13,6 +13,15 @@ Open [http://localhost:8080](http://localhost:8080) to view any APIs in the brow
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
+### `yarn prod:build`
+
+Runs server-side Node code and Create React App in production mode.
+Make sure you've bundled your React code. (See `yarn build`)<br />
+Open [http://localhost:8080](http://localhost:8080) to view the application.
+
+Make sure to uncomment: <br />
+`app.use(express.static('build'));` in the **server.js** file
+
 ### `yarn client`
 
 Runs the client side React app in the development mode.<br />
@@ -23,23 +32,12 @@ You will also see any lint errors in the console.
 
 ### `yarn server`
 
-#### Development Mode
-Runs the server side Node code.<br />
+Runs the server side Node code in development mode.<br />
 Open [http://localhost:8080](http://localhost:8080) to view APIs in the browser.
 
 Will update if you make edits. 
 Make sure to uncomment: <br />
-`app.use(express.static('public'));` <br />
-in the **server.js** file
-
-#### Production Mode
-
-Runs server-side Node code and the production build of Create React App.
-Open [http://localhost:8080](http://localhost:8080) to view the application
-
-Make sure to uncomment: <br />
-`app.use(express.static('build'));` <br />
-in the **server.js** file
+`app.use(express.static('public'));` in the **server.js** file
 
 ### `yarn test`
 
@@ -56,33 +54,31 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+---
+
 ## Main Technologies Used:
 
-##### Express:
-A framework for Node to run the back end portion of the application.
-#### ESM
-ES6 module loader for Node.
-#### Reactstrap:
-React Components styled using Bootstrap 4. Saves tons of time on building components.
-#### Bootstrap 4:
-CSS Framework that saves tons of time on styling and it uses flexbox!!
-#### Axios:
-Promise-based HTTP client that is super easy to use and has great out-of-the-box features in its API.
-#### MongoDB:
-Popular nonrelational DB used to store the employees.
-#### Mongoose:
-easy to use mongodb schema model. 
-#### Multer:
-File uplaod library.
+- **Express:** A framework for Node to run the back end portion of the application.
+- **ESM:** ES6 module loader for Node.
+- **Reactstrap:** React Components styled using Bootstrap 4. Saves tons of time on building components.
+- **Bootstrap 4:** CSS Framework that saves tons of time on styling and it uses flexbox!
+- **Axios:** Promise-based HTTP client that is super easy to use and has great out-of-the-box features in its API.
+- **MongoDB:** Popular nonrelational DB used to store the employees.
+- **Mongoose:** Easy-to-use MongoDB schema model. 
+- **Multer:** File uplaod library.
+
+---
 
 ## To add for future development
-1. **TESTING** I did not have time to fully implement all of the testing features I wanted. I unfortunately learned that I can't do Node API testing with jest in this app because create-react-app does not allow changing the jest testing environment in package.json.
+1. **TESTING:** I did not have time to fully implement all of the testing features I wanted. Unfortunately, I learned that I can't do Node API testing with jest in this app because create-react-app does not allow changing the jest testing environment in package.json.
    
-2. **VALIDATION** I did not include any validation in the form for submitting or updating an employee. In the future you would need validation for submitting the required fields, date validation etc. to make this a fully functioning directory. There's some validation in how Mongoose accepts values into the schema, but I could always improve it. If I wanted to be super fancy I could have made another database to store the images uploaded, but again I felt storing them on the server worked just fine and wanted to put my efforts elsewhere.
+2. **VALIDATION:** I did not include any validation in the form for submitting or updating an employee. In the future you would need validation for submitting the required fields, date validation etc. to make this a fully functioning directory. There's some validation in how Mongoose accepts values into the schema, but I could always improve it. If I wanted to be super fancy I could have made another database to store the images uploaded, but again I felt storing them on the server worked just fine and wanted to put my efforts elsewhere.
    
-3. **PROP-TYPES** Usually I prefer having some sort of type checker, but due to time constraints I did not. In the future they would be useful.
+3. **PROP-TYPES:** Usually I prefer having some sort of type checker, but due to time constraints I did not. In the future they would be useful.
 
-4. **ERROR HANDLING** There is not much error handling for bad data or potentially broken api calls. A 404 page for for the client-side portion of the app would also be useful.
+4. **ERROR HANDLING:** There is not much error handling for bad data or potentially broken api calls. A 404 page for for the client-side portion of the app would also be useful.
+
+---
 
 ## Improvements/Changes
 1. Maybe remove Redux. It's not extremely necessary to the state of the project right now. It would probably come in handy if this project was scaled

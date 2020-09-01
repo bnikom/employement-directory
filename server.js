@@ -43,6 +43,7 @@ try {
   // api routes
   app.use('/api', routes);
 
+  // 404 page
   app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
   });

@@ -1,17 +1,42 @@
 import React from 'react';
-import './App.css';
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+} from "react-router-dom";
+import { Provider } from 'react-redux'
+import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-import Routes from './routes/Routes';
+import Header from './components/Header';
+import Home from './components/Home';
+import Employee from './components/Employee';
+import reducers from './reducers';
 
+const App = () => {
+  const context = {};
+  const store = createStore(reducers, composeWithDevTools(applyMiddleware(thunk)));
 
-// add header and footer
-// meebbe add a custom hook?
-
-function App() {
+  // client-side routing for application
   return (
-    <div className="App">
-      <Routes />
-    </div>
+    <Provider store={store}>
+      <BrowserRouter context={context}>
+        <Header />
+        <Switch>
+          <Route
+            exact
+            path='/employee/:employeeID'
+            component={Employee}
+          />
+          <Route
+            exact
+            path='/'
+            component={Home}
+          />
+        </Switch>
+      </BrowserRouter>
+    </Provider>
   );
 }
 

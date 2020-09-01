@@ -1,8 +1,7 @@
 import React from 'react';
-import { render, fireEvent, waitFor, screen } from '@testing-library/react';
+import { render, fireEvent, waitFor, screen, cleanup, waitForElement } from '@testing-library/react';
 // import supertest from 'supertest';
 import App from './App';
-import Home from './components/Home';
 import ReactDOM from 'react-dom';
 // import app from '../server.js';
 // import mongoose from 'mongoose';
@@ -10,6 +9,8 @@ import ReactDOM from 'react-dom';
 // import employee from 'reducers/employee.reducer'
 
 // const request = supertest(app);
+
+afterEach(cleanup);
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
@@ -21,16 +22,6 @@ test('renders header link', () => {
   const linkElement = getByText(/Employee Directory/i);
   expect(linkElement).toBeInTheDocument();
 });
-
-test('handles modal opening', async () => {
-  fireEvent.click(screen.getByText('Add Employee'))
-
-  await waitFor(() => screen.getByRole('dialog'))
-
-  expect(screen.getByRole('dialog')).toHaveTextContent('Email')
-  // const inputNode = screen.getByLabelText('Username')
-  expect(screen.getByRole('button')).not.toHaveAttribute('disabled')
-})
 
 /**
 // Connects to database called avengers

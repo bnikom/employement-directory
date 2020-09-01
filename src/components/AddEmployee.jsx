@@ -72,7 +72,7 @@ const AddEmployeeForm = ({
   };
 
   return (
-    <Form className="p-2">
+    <Form className="p-2" data-testid="addEmployee">
       <FormGroup>
         <Label for="name">Name</Label>
         <Input
