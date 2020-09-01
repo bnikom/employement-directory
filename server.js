@@ -39,7 +39,7 @@ try {
   // UNCOMMENT for development mode
   // app.use(express.static('public'));
   app.use('/uploads', express.static('uploads'))
-    // UNCOMMENT for production mode
+  // UNCOMMENT for production mode
   app.use(express.static('build'))
 
   // api routes

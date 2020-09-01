@@ -81,7 +81,7 @@ const Home = () => {
         />
       </Modal>
       <hr />
-      <p>Total Employees: {count}</p>
+      <p className="d-flex justify-content-center mb-3">Total Employees: {count}</p>
       <Row>
         {totalEmployees.map(({
           _id,
