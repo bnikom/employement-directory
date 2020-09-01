@@ -36,8 +36,10 @@ try {
   app.use(morgan('combined'));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+  // UNCOMMENT for development mode
   // app.use(express.static('public'));
   app.use('/uploads', express.static('uploads'))
+    // UNCOMMENT for production mode
   app.use(express.static('build'))
 
   // api routes

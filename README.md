@@ -7,7 +7,7 @@ In the project directory, you can run:
 ### `yarn start`
 
 Runs the app client-side and server-side in parallel in development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view the client side application.
+Open [http://localhost:3000](http://localhost:3000) to view the client side application.<br />
 Open [http://localhost:8080](http://localhost:8080) to view any APIs in the browser.
 
 The page will reload if you make edits.<br />
@@ -33,9 +33,9 @@ You will also see any lint errors in the console.
 ### `yarn server`
 
 Runs the server side Node code in development mode.<br />
-Open [http://localhost:8080](http://localhost:8080) to view APIs in the browser.
+Open [http://localhost:8080](http://localhost:8080) to view APIs in the browser.<br />
+Will update in real-time if you make edits.
 
-Will update if you make edits. 
 Make sure to uncomment: <br />
 `app.use(express.static('public'));` in the **server.js** file
 
@@ -70,16 +70,14 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ---
 
 ## To add for future development
-1. **TESTING:** I did not have time to fully implement all of the testing features I wanted. Unfortunately, I learned that I can't do Node API testing with jest in this app because create-react-app does not allow changing the jest testing environment in package.json.
+1. **TESTING:** I did not have time to fully implement all of the testing features I wanted. Unfortunately I learned that I can't do Node API testing with jest in this app because create-react-app does not allow changing the jest testing environment in package.json.
    
-2. **VALIDATION:** I did not include any validation in the form for submitting or updating an employee. In the future you would need validation for submitting the required fields, date validation etc. to make this a fully functioning directory. There's some validation in how Mongoose accepts values into the schema, but I could always improve it. If I wanted to be super fancy I could have made another database to store the images uploaded, but again I felt storing them on the server worked just fine and wanted to put my efforts elsewhere.
+2. **VALIDATION:** I did not include any validation in the form for adding or updating an employee. In the future, I would need validation for submitting the required fields, date validation etc. to make this a fully functioning directory. There's some validation in how Mongoose accepts values into the schema, but I could always improve it.
    
-3. **PROP-TYPES:** Usually I prefer having some sort of type checker, but due to time constraints I did not. In the future they would be useful.
+3. **IMG DATABASE:** If I wanted to be fancy I could have made another database to store the images uploaded, but I felt storing images on the server worked just fine.
+   
+4. **PROP-TYPES:** Usually I prefer utilizing some sort of type checker, but due to time constraints I did not. In the future it would be useful.
 
-4. **ERROR HANDLING:** There is not much error handling for bad data or potentially broken api calls. A 404 page for for the client-side portion of the app would also be useful.
-
----
-
-## Improvements/Changes
-1. Maybe remove Redux. It's not extremely necessary to the state of the project right now. It would probably come in handy if this project was scaled
-2. Improve the responsiveness of the site. Adding some media queries for a uniform UI experience would be nice.
+5. **ERROR HANDLING:** There is not much error handling for bad data or potentially broken api calls. A complete 404 page for for the client-side portion of the app would also be useful.
+   
+6. **RESPONSIVENESS:** Improve the responsiveness of the site by adding more media queries for a uniform UI experience would be nice.
