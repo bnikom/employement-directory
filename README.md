@@ -6,7 +6,7 @@ In the project directory, you can run:
 
 ### `yarn start`
 
-Runs the app client-side and server-side in parallel.<br />
+Runs the app client-side and server-side in parallel in development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view the client side application.
 Open [http://localhost:8080](http://localhost:8080) to view any APIs in the browser.
 
@@ -23,11 +23,23 @@ You will also see any lint errors in the console.
 
 ### `yarn server`
 
-Runs the server side Node app in the development mode.<br />
-Open [http://localhost:8080](http://localhost:8080) to view any APIs in the browser.
+#### Development Mode
+Runs the server side Node code.<br />
+Open [http://localhost:8080](http://localhost:8080) to view APIs in the browser.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Will update if you make edits. 
+Make sure to uncomment: <br />
+`app.use(express.static('public'));` <br />
+in the **server.js** file
+
+#### Production Mode
+
+Runs server-side Node code and the production build of Create React App.
+Open [http://localhost:8080](http://localhost:8080) to view the application
+
+Make sure to uncomment: <br />
+`app.use(express.static('build'));` <br />
+in the **server.js** file
 
 ### `yarn test`
 
@@ -47,21 +59,21 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 ## Main Technologies Used:
 
 ##### Express:
-A framework for Node to run the back end portion of the application
+A framework for Node to run the back end portion of the application.
 #### ESM
-ES6 module loader for Node
+ES6 module loader for Node.
 #### Reactstrap:
-React Components styled using Bootstrap 4. Saves me tons of time on building components
+React Components styled using Bootstrap 4. Saves tons of time on building components.
 #### Bootstrap 4:
-Great CSS Framework that again saves me tons of time on styling my components. And it uses flexbox!!
+CSS Framework that saves tons of time on styling and it uses flexbox!!
 #### Axios:
 Promise-based HTTP client that is super easy to use and has great out-of-the-box features in its API.
 #### MongoDB:
-popular nonrelational DB for storing the employees.
+Popular nonrelational DB used to store the employees.
 #### Mongoose:
 easy to use mongodb schema model. 
 #### Multer:
-popular file uplaod library
+File uplaod library.
 
 ## To add for future development
 1. **TESTING** I did not have time to fully implement all of the testing features I wanted. I unfortunately learned that I can't do Node API testing with jest in this app because create-react-app does not allow changing the jest testing environment in package.json.
@@ -70,6 +82,8 @@ popular file uplaod library
    
 3. **PROP-TYPES** Usually I prefer having some sort of type checker, but due to time constraints I did not. In the future they would be useful.
 
+4. **ERROR HANDLING** There is not much error handling for bad data or potentially broken api calls. A 404 page for for the client-side portion of the app would also be useful.
+
 ## Improvements/Changes
-1. I don't think I necessarily needed to use Redux in this project, but I already committed to the decision.
+1. Maybe remove Redux. It's not extremely necessary to the state of the project right now. It would probably come in handy if this project was scaled
 2. Improve the responsiveness of the site. Adding some media queries for a uniform UI experience would be nice.

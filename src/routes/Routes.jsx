@@ -27,13 +27,13 @@ const Routes = () => {
         <Switch>
           <Route
             exact
-            path='/'
-            component={Home}
+            path='/employee/:employeeID'
+            component={Employee}
           />
           <Route
             exact
-            path='/employee/:employeeID'
-            component={Employee}
+            path='/'
+            component={Home}
           />
         </Switch>
       </BrowserRouter>

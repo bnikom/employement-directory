@@ -23,6 +23,7 @@ $blue-header: #172B54;
 
     .front {
       background-color: #bbb;
+      align-items: center;
     }
 
     .back {
@@ -39,7 +40,6 @@ $blue-header: #172B54;
       -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
       display: flex;
-      align-items: center;
       justify-content: center;
       flex-direction: column;
     }

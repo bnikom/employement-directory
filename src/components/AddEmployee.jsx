@@ -31,16 +31,17 @@ const AddEmployeeForm = ({
 
         // can't send form data over a patch request
         // only add key to object if a new value has been added (not empty or preexisting value)
-        if (name !== '' || name !== nameProp) updateArgs.name = name;
-        if (title !== '' || title !== titleProp) updateArgs.title = title;
-        if (date !== '' || date !== dateProp) updateArgs.dob = date;
-        if (email !== '' || email !== emailProp) updateArgs.email = email
-        if (phone !== '' || phone !== phoneProp) updateArgs.phone = phone;
-        if (department !== 'Select Department' || department !== departmentProp) updateArgs.department = department;
+        if (name !== '' && name !== nameProp) updateArgs.name = name;
+        if (title !== '' && title !== titleProp) updateArgs.title = title;
+        if (date !== '' && date !== dateProp) updateArgs.dob = date;
+        if (email !== '' && email !== emailProp) updateArgs.email = email
+        if (phone !== '' && phone !== phoneProp) updateArgs.phone = phone;
+        if (department !== 'Select Department' && department !== departmentProp) updateArgs.department = department;
         if (photo) updateArgs.imageUrl = photo;
 
         await axios.patch(`http://localhost:8080/api/employee/${id}`, updateArgs);
       } else {
+        // create form data for post response
         const formData = new FormData();
 
         formData.append("name", name);
@@ -68,7 +69,6 @@ const AddEmployeeForm = ({
     } catch (error) {
       console.log(error)
     }
-
   };
 
   return (

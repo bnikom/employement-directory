@@ -4,9 +4,7 @@ import {
   FETCH_USER_SUCCESS,
 } from '../constants'
 
-// simple reducer
-// I don't really think I even need to use redux to make this app work,
-// but I already committed to my decision so...
+// reducer for different case states
 export default (state = {}, action) => {
   switch (action.type) {
     case FETCH_USER_LOADING: {

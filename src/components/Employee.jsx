@@ -20,11 +20,8 @@ const Employee = ({ match }) => {
 
   // fetch employee on initial page load and when form is submitted
   useEffect(() => {
-    console.log('in here')
     dispatch(fetchUser(match.params.employeeID));
   }, [match, dispatch, formSubmitted]);
-
-  console.log(employee)
 
   if (isEmpty(employee.data)) {
     return <ReactLoading type={'spin'} color={'#0000'} height={667} width={375} />

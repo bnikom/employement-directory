@@ -2,6 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import path from 'path';
 import dotenv from 'dotenv';
 
 import routes from './api/routes';
@@ -35,20 +36,16 @@ try {
   app.use(morgan('combined'));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-  app.use(express.static('public'));
+  // app.use(express.static('public'));
   app.use('/uploads', express.static('uploads'))
+  app.use(express.static('build'))
 
   // api routes
   app.use('/api', routes);
 
-  // handle api 404 pages
-  // if this middleware is reached - the page is not found
-  app.use((req, res, next) => {
-    const error = new Error('error')
-    error.status = 404;
-    throw error;
+  app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
   });
-
   // catches all api errors
   app.use((error, req, res, next) => {
     console.log(error)
